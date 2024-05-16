@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GSAP Image Slider</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <style>
+            body{
+                overflow: hidden;
+            }
+            .w-3-10 {
+              width: 40%;
+            }
+            .w-1-10 {
+              width: 10%;
+            }
+            .w-1-20 {
+              width: 5%;
+            }
+            .images{
+                overflow-x: hidden!important;
+            }
+            img{
+                display: block;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="flex h-screen images">
+            <div class="image w-1/2 bg-gray-100 p-4">
+              <h1 class="text-9xl font-bold">AKARU</h1>
+              <p class="mt-4">Nous sommes une agence web à Lyon avec un savoir-faire de précision. Pour créer des sites et des designs, nous mobilisons l’audace et notre amour du détail qui tue.</p>
+            </div>
+            <div class="image1 w-3-10 flex  justify-center" style="background-color: #B692A1;">
+                <img src="./image1.webp" alt="Image 1" class="object-cover img1">
+            </div>
+            <div class="image2 w-1-10  flex  mt-" style="background-color: #BFCCD8;">              
+                <img src="./image2.webp" alt="Image 2" class="object-cover img2">
+            </div>
+            <div class="image3 w-1-20  flex  justify-center" style="background-color: #798E7B;">
+              <img src="./image3.webp" alt="Image 3" class="object-cover img3">
+            </div>
+        </div>
+    </body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+    <script>
+        // gsap.registerPlugin(ScrollTrigger);
+        // let image = document.querySelector(".image");
+        // gsap.to(".image", {
+        //     x: () => (image.scrollWidth - window.innerWidth),
+        //     // scaleX: 2,
+        //     duration: 2,
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: ".images",
+        //         start: "top top",
+        //         end: "+=5000", // Adjust based on the desired scroll length
+        //         scrub: true,
+        //         pin: true
+        //     }
+        // })
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        let image = document.querySelector(".image");
+
+        console.log(image.scrollWidth);
+
+        let scroll_image = gsap.to(".images", {
+            xPercent: -120,
+            x: () => (image.scrollWidth - window.innerWidth),
+            // scaleX: 2,
+            duration: 2,
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: () => "+=" + image.offsetWidth + "px",
+                scrub: true,
+                pin: true,
+            }
+        })
+        
+        // let scroll_image1 = gsap.to(".image1", {
+        //     xPercent: -120,
+        //     x: () => (image.scrollWidth - window.innerWidth),
+        //     scaleX: 2,
+        //     duration: 2,
+        //     scrollTrigger: {
+        //         trigger: ".images",
+        //         start: "top top",
+        //         end: () => "+=" + image.offsetWidth + "px",
+        //         scrub: true,
+        //         pin: true,
+        //     }
+        // })
+
+        
+
+        const scroll_image1_img = gsap.timeline({
+            scaleX: 1.7,
+            scaleY: 1.7,
+            scrollTrigger: {
+                trigger: ".img1",
+                scrub: 1,
+                containerAnimation: scroll_image1,
+                // markers: true
+            },
+        });
+
+        scroll_image1_img.to(".img1", {
+            duration: 2
+        })
+
+        // let image1 = document.querySelector(".image1");
+        // let scroll_image2 = gsap.to(".image2", {
+        //     x: () => (image1.scrollWidth - window.innerWidth),
+        //     scaleX: 1.7,
+        //     duration: 1.5,
+        //     scrollTrigger: {
+        //         trigger: ".images",
+        //         start: "top top",
+        //         end: () => "+=" + image1.offsetWidth + "px",
+        //         scrub: true,
+        //         pin: true,
+        //     }
+        // })
+            
+        gsap.fromTo(
+            ".image",
+            {x: window.innerWidth},
+            {x: 0, duration: 1}
+        )
+
+        gsap.fromTo(
+            ".image1",
+            {x: window.innerWidth},
+            {x: 0, duration: 1.5}
+        )
+
+        gsap.fromTo(
+            ".image2",
+            {x: window.innerWidth},
+            {x: 0, duration: 1.5}
+        )
+
+        gsap.fromTo(
+            ".image3",
+            {x: window.innerWidth},
+            {x: 0, duration: 1.5}
+        )
+
+        
+
+        
+    </script>
+</html>
